@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from datetime import datetime, timedelta
 
-
 def sg(request):
     if request.method == "POST":
         name = request.POST.get("name")
@@ -20,11 +19,22 @@ def sg(request):
             tzinfo=None
         ) < timedelta(hours=24):
 
+            # Send an email to notify that a submission was already made within 24 hours
             send_mail(
                 "Enquiry Form Submission",
-                "You have already submitted an enquiry. Please try again after 24 hours.",
-                "sarfrajA43@gmail.com",
-                [email],
+                f"""
+                You have received a new enquiry submission.
+
+                Name: {name}
+                Email: {email}
+                Mobile: {mobile}
+                Message: {message}
+
+                Please respond to the enquiry accordingly.
+                """,
+                "julasarfraj@gmail.com",  
+                [email],  
+                fail_silently=False,
             )
             return HttpResponse(
                 "You have already submitted an enquiry. Please try again after 24 hours."
@@ -36,3 +46,4 @@ def sg(request):
         return HttpResponse("Data added successfully.")
 
     return render(request, "index.html")
+

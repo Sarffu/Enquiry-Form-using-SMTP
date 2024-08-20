@@ -5,24 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enquiry Form</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-    <form method="post" action="{% url 'sg' %}">
-        {% csrf_token %}
+    <div class="container">
+        <h2>Enquiry Form</h2>
 
-        <label for="name">Name : </label>
-        <input type="text" id="name" name="name"> <br> <br>
+        <form method="post" action="{% url 'sg' %}">
+            {% csrf_token %}
 
-        <label for="email">Email : </label>
-        <input type="text" id="email" name="email"> <br> <br>
-        <label for="mobile">Mobile Number : </label>
-        <input type="text" name="mobile" id="mobile"> <br> <br>
-        <label for="message">Message : </label>
-        <input type="textbox" name="message" id="message"> <br> <br>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required> <br>
 
-        <input type="submit" onclick="submit"></input>
-    </form>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required> <br>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="text" id="mobile" name="mobile" required> <br> <br>
+            
+
+            <label for="message">Message:</label>
+            <textarea name="message" id="message" rows="4" required></textarea> <br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </body>
 
 </html>
